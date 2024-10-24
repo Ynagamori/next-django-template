@@ -1,0 +1,44 @@
+version: '3'
+services:
+  frontend:
+    build:
+      context: frontend
+    tty: true
+    volumes:
+      - ./frontend:/frontend
+    ports:
+      - 3000:3000
+    env_file:
+      - ./.env.dev
+    environment:
+      - WATCHPACK_POLLING=true
+  backend:
+    build:
+      context: backend
+    command: gunicorn gamog_project.wsgi:application --bind 0.0.0.0:8000
+    tty: true
+    volumes:
+      - ./backend:/backend
+    expose:
+      - 8000
+    depends_on:
+      - db
+    env_file:
+      - ./.env.dev
+  db:
+    image: postgres
+    env_file:
+      - ./.env.dev
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+  nginx:
+    build: ./nginx
+    ports:
+      - 1317:80
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:
+  pgadmin4_data:
+
