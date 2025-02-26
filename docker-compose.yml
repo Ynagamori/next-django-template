@@ -1,4 +1,3 @@
-version: '3'
 services:
   frontend:
     build:
@@ -15,7 +14,7 @@ services:
   backend:
     build:
       context: backend
-    command: gunicorn gamog_project.wsgi:application --bind 0.0.0.0:8000
+    command: gunicorn example_app.wsgi:application --bind 0.0.0.0:8000
     tty: true
     volumes:
       - ./backend:/backend

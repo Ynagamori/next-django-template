@@ -1,13 +1,13 @@
-# tech_blog
+# example_appcm
 
 # frontend 初回起動
-docker exec -it tech_blog-frontend-1 bash
-cd gamog_project
+docker exec -it example_app-frontend-1 bash
+cd example_app
 npm upgrade
 npm run dev
 
 # backend 初回起動
-docker exec -it tech_blog-backend-1 bash
+docker exec -it example_app-backend-1 bash
 python manage.py makemigrations
 python manage.py migrate
 
